@@ -81,7 +81,11 @@
   .container {
     max-width: 1240px;
     margin: 0 auto;
-    padding: 48px 32px 80px;
+    padding:
+      calc(48px + env(safe-area-inset-top))
+      calc(32px + env(safe-area-inset-right))
+      calc(80px + env(safe-area-inset-bottom))
+      calc(32px + env(safe-area-inset-left));
   }
 
   /* Top bar */
@@ -226,9 +230,9 @@
   .pick-cta {
     margin-top: 48px;
     display: flex;
-    align-items: center;
-    gap: 24px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
   }
   .pick-btn {
     background: var(--accent);
@@ -255,11 +259,13 @@
   }
   .pick-btn:hover .pick-arrow { transform: translateX(6px); }
   .pick-hint {
+    margin-top: 16px;
     font-size: 12px;
     color: var(--ink-faint);
     letter-spacing: 0.1em;
   }
   .donate-btn {
+    margin-top: 28px;
     background: transparent;
     color: var(--accent);
     border: 1px solid var(--accent);
@@ -1147,10 +1153,10 @@
   }
 
   /* === 贊助按鈕（浮動） === */
-  .donate-btn {
+  .donate-fab {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    right: calc(24px + env(safe-area-inset-right));
     z-index: 9997;
     background: var(--accent);
     color: var(--bg);
@@ -1167,11 +1173,11 @@
     gap: 8px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .donate-btn:hover {
+  .donate-fab:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 32px rgba(232,201,119,0.35);
   }
-  .donate-btn span:first-child { font-size: 16px; }
+  .donate-fab span:first-child { font-size: 16px; }
 
   /* === 贊助 modal === */
   .donate-modal {
@@ -1294,9 +1300,9 @@
   }
 
   @media (max-width: 480px) {
-    .donate-btn {
-      bottom: 16px;
-      right: 16px;
+    .donate-fab {
+      bottom: calc(16px + env(safe-area-inset-bottom));
+      right: calc(16px + env(safe-area-inset-right));
       padding: 12px 18px;
       font-size: 13px;
     }
@@ -1356,13 +1362,13 @@
           <path d="M1 7H19M19 7L13 1M19 7L13 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
       </button>
-      <span class="pick-hint">從目前篩選結果中隨機抽一家</span>
-      <a class="donate-btn" href="https://ganknow.com/jacky8495/tip" target="_blank" rel="noopener">
+      <span class="pick-hint">（從目前篩選結果中隨機抽一家）</span>
+      <a class="donate-btn" href="https://service.jkopay.com/r/transfer?j=Transfer:911291525" target="_blank" rel="noopener noreferrer">
         <svg class="donate-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 11h18l-1.5 6.5a2.5 2.5 0 0 1-2.5 2H9a2.5 2.5 0 0 1-2.5-2L5 11"/>
           <path d="M9 7c0-1 1-1.5 1-2.5M13 7c0-1 1-1.5 1-2.5"/>
         </svg>
-        請我吃宵夜
+        請我吃一份宵夜？
       </a>
     </div>
   </section>
@@ -2134,7 +2140,7 @@ render();
 </script>
 
 <!-- ================== 贊助按鈕 ================== -->
-<button class="donate-btn" id="donateBtn" type="button" aria-label="請我吃宵夜">
+<button class="donate-fab" id="donateBtn" type="button" aria-label="請我吃宵夜">
   <span>🍜</span>
   <span>請我吃宵夜</span>
 </button>
