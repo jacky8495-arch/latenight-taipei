@@ -148,30 +148,6 @@
     align-items: center;
     gap: 10px;
   }
-  .donate-mini {
-    background: none;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    padding: 6px 14px;
-    font-family: inherit;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    cursor: pointer;
-    transition: all var(--transition);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-  .donate-mini:hover {
-    background: var(--accent);
-    color: var(--bg);
-  }
-  .donate-mini svg {
-    width: 12px;
-    height: 12px;
-  }
 
   /* Hero */
   .hero {
@@ -949,11 +925,12 @@
   }
   .pagination.show-all .pagination-row { display: none; }
 
-  /* Back to top */
+  /* Back to top（跟贊助按鈕水平置中成一對） */
   .back-to-top {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    bottom: calc(24px + env(safe-area-inset-bottom));
+    left: 50%;
+    margin-left: 6px;
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -978,6 +955,14 @@
   }
   .back-to-top:hover { transform: translateY(-2px) scale(1.05); }
   .back-to-top svg { width: 20px; height: 20px; }
+  @media (max-width: 480px) {
+    .back-to-top {
+      bottom: calc(16px + env(safe-area-inset-bottom));
+      width: 42px;
+      height: 42px;
+    }
+    .back-to-top svg { width: 18px; height: 18px; }
+  }
 
   footer {
     margin-top: 96px;
@@ -1042,7 +1027,6 @@
     .filters { padding: 20px; margin-bottom: 32px; }
     .pick-card-wrap { padding: 32px 24px; }
     .pick-name { font-size: 26px; }
-    .donate-mini { display: none; }
     .mobile-toggle { display: inline-flex; }
     .filter-collapsible { display: none; margin-bottom: 28px; }
     .filter-collapsible.expanded { display: block; }
@@ -1152,11 +1136,12 @@
     body { display: none !important; }
   }
 
-  /* === 贊助按鈕（浮動） === */
+  /* === 贊助按鈕（浮動，跟回到頂部按鈕水平置中成一對） === */
   .donate-fab {
     position: fixed;
     bottom: calc(24px + env(safe-area-inset-bottom));
-    right: calc(24px + env(safe-area-inset-right));
+    right: 50%;
+    margin-right: 6px;
     z-index: 9997;
     background: var(--accent);
     color: var(--bg);
@@ -1302,7 +1287,6 @@
   @media (max-width: 480px) {
     .donate-fab {
       bottom: calc(16px + env(safe-area-inset-bottom));
-      right: calc(16px + env(safe-area-inset-right));
       padding: 12px 18px;
       font-size: 13px;
     }
@@ -1318,13 +1302,6 @@
       <span class="brand-text"><span class="brand-en">LATE NIGHT TAIPEI · </span>深夜地圖</span>
     </div>
     <div class="topbar-actions">
-      <a class="donate-mini" href="https://ganknow.com/jacky8495/tip" target="_blank" rel="noopener" aria-label="請我吃宵夜">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 11h18l-1.5 6.5a2.5 2.5 0 0 1-2.5 2H9a2.5 2.5 0 0 1-2.5-2L5 11"/>
-          <path d="M9 7c0-1 1-1.5 1-2.5M13 7c0-1 1-1.5 1-2.5"/>
-        </svg>
-        <span>請我吃宵夜</span>
-      </a>
       <button class="theme-toggle" id="theme-toggle" aria-label="切換主題">
         <span class="theme-icon" id="theme-icon"></span>
         <span id="theme-label">LIGHT</span>
