@@ -154,7 +154,7 @@
 
   /* Hero */
   .hero {
-    margin-bottom: 13px;
+    margin-bottom: 28px;
     position: relative;
   }
   .hero-eyebrow {
@@ -968,8 +968,8 @@
   }
 
   footer {
-    margin-top: 96px;
-    padding-top: 32px;
+    margin-top: 32px;
+    padding-top: 24px;
     border-top: 1px solid var(--line);
     color: var(--ink-faint);
     font-size: 11px;
@@ -977,6 +977,26 @@
     text-align: center;
     font-family: "Inter", sans-serif;
     text-transform: uppercase;
+  }
+  footer p { margin: 4px 0; }
+  footer .footer-legal {
+    text-transform: none;
+    letter-spacing: 0.05em;
+    font-family: "Noto Sans TC", sans-serif;
+    font-size: 12px;
+    margin: 8px auto;
+    max-width: 480px;
+    line-height: 1.7;
+    color: var(--ink-faint);
+  }
+  footer .footer-data {
+    margin-top: 12px;
+  }
+  footer .footer-domain {
+    margin-top: 8px;
+    letter-spacing: 1.5px;
+    text-transform: lowercase;
+    color: var(--ink-soft);
   }
 
   /* View toggle (mobile only) */
@@ -1013,7 +1033,7 @@
     .filter-row { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 768px) {
-    .container { padding: 32px 0 60px; }
+    .container { padding: 32px 20px 60px; }
     .topbar { margin-bottom: 40px; gap: 16px; }
     .brand { gap: 8px; }
     .brand-text {
@@ -1263,29 +1283,6 @@
     line-height: 1.6;
   }
 
-  /* === 頁尾 === */
-  .site-footer {
-    text-align: center;
-    padding: 60px 20px 80px;
-    border-top: 1px solid var(--line-soft);
-    margin-top: 80px;
-    font-size: 12px;
-    color: var(--ink-faint);
-    line-height: 1.9;
-  }
-  .site-footer p { margin: 4px 0; }
-  .site-footer .footer-domain {
-    margin-top: 14px;
-    letter-spacing: 1.5px;
-    color: var(--ink-soft);
-    font-family: "Inter", sans-serif;
-  }
-  .site-footer .footer-legal {
-    max-width: 480px;
-    margin: 8px auto 0;
-    color: var(--ink-faint);
-  }
-
   @media (max-width: 480px) {
     .donate-fab {
       bottom: calc(16px + env(safe-area-inset-bottom));
@@ -1496,7 +1493,10 @@
   </div>
 
   <footer>
-    Data · Threads & Google Maps · Asia/Taipei
+    <p>© 2026 chien-sanyo · 台北深夜地圖</p>
+    <p class="footer-legal">本站內容為原創，僅供個人參考。<br>未經授權，禁止複製、轉載、爬取或商業使用。</p>
+    <p class="footer-data">Data · Threads & Google Maps · Asia/Taipei</p>
+    <p class="footer-domain">latenight.chien-sanyo.com</p>
   </footer>
 </div>
 
@@ -2141,13 +2141,6 @@ render();
     <p class="donate-note">手機點擊後會跳轉至街口支付 App<br>金額可在 App 內自由修改</p>
   </div>
 </div>
-
-<!-- ================== 頁尾 ================== -->
-<footer class="site-footer">
-  <p>© 2026 chien-sanyo · 台北深夜地圖</p>
-  <p class="footer-legal">本站內容為原創，僅供個人參考。<br>未經授權，禁止複製、轉載、爬取或商業使用。</p>
-  <p class="footer-domain">latenight.chien-sanyo.com</p>
-</footer>
 
 <!-- ================== 防護 + PWA 註冊 ================== -->
 <script>
