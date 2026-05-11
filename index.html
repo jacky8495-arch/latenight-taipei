@@ -1977,7 +1977,7 @@ function renderPageNumbers(totalPages, current){
   const container = document.getElementById('page-numbers');
   container.innerHTML = '';
 
-  const FRONT = 2, BACK = 2;
+  const FRONT = 1, BACK = 1;
   const frontEnd = Math.min(FRONT, totalPages);
   const endStart = Math.max(totalPages - BACK + 1, 1);
   const winStart = Math.max(current - 1, 1);
@@ -2197,7 +2197,7 @@ function countUp(el, target, duration = 1800) {
   const start = performance.now();
   (function tick(now) {
     const t = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - t, 3);
+    const eased = 1 - Math.pow(1 - t, 6);
     el.textContent = Math.round(eased * target);
     if (t < 1) requestAnimationFrame(tick);
   })(start);
