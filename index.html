@@ -1105,8 +1105,10 @@
       padding: 11px 0;
     }
 
-    /* 分頁器：手機上元素偏多，給更友善的換行間距 */
+    /* 分頁器：手機上一排放得下，禁止換行 */
     .pagination { gap: 6px; }
+    .pagination-row { flex-wrap: nowrap; }
+    .page-nav { padding: 9px 10px; }
     .page-num { min-width: 34px; padding: 8px 8px; font-size: 12px; }
     .page-show-all { margin-left: 0; }
 
@@ -1973,7 +1975,8 @@ function renderPageNumbers(totalPages, current){
   const container = document.getElementById('page-numbers');
   container.innerHTML = '';
 
-  const FRONT = 2, BACK = 2;
+  const smallScreen = window.innerWidth <= 480;
+  const FRONT = smallScreen ? 1 : 2, BACK = smallScreen ? 1 : 2;
   const frontEnd = Math.min(FRONT, totalPages);
   const endStart = Math.max(totalPages - BACK + 1, 1);
   const winStart = Math.max(current - 1, 1);
