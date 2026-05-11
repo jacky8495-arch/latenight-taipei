@@ -2192,15 +2192,28 @@ grid.addEventListener('click', (e) => {
 // === 動畫工具 ===
 let _firstRender = true;
 
-function countUp(el, target, duration = 2000) {
+function countUp(el, target, duration = 3000) {
   if (!el || isNaN(target) || target <= 0) return;
   el.textContent = 0;
+  // Phase 1 (60% of time): 0 → target-5，cubic ease-in-out
+  // Phase 2 (40% of time): 最後 5 個數字逐步減速，每格越來越慢
+  const slowN = Math.min(5, target);
+  const fastTarget = target - slowN;
+  const phase1 = 0.60;
   const start = performance.now();
   (function tick(now) {
     const t = Math.min((now - start) / duration, 1);
-    // cubic ease-in-out: 緩起 → 快中 → 緩末（倒數感）
-    const eased = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
-    el.textContent = Math.round(eased * target);
+    let value;
+    if (t <= phase1) {
+      const u = t / phase1;
+      const eased = u < 0.5 ? 4*u*u*u : 1 - Math.pow(-2*u+2, 3)/2;
+      value = Math.round(eased * fastTarget);
+    } else {
+      const u = (t - phase1) / (1 - phase1);
+      const eased = 1 - Math.pow(1 - u, 2);
+      value = fastTarget + Math.round(eased * slowN);
+    }
+    el.textContent = value;
     if (t < 1) requestAnimationFrame(tick);
   })(start);
 }
