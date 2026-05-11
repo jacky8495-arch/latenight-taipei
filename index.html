@@ -2192,18 +2192,17 @@ grid.addEventListener('click', (e) => {
 // === 動畫工具 ===
 let _firstRender = true;
 
-function countUp(el, target, duration = 1800) {
+function countUp(el, target, duration = 2000) {
   if (!el || isNaN(target) || target <= 0) return;
   el.textContent = 0;
-  setTimeout(() => {
-    const start = performance.now();
-    (function tick(now) {
-      const t = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 6);
-      el.textContent = Math.round(eased * target);
-      if (t < 1) requestAnimationFrame(tick);
-    })(performance.now());
-  }, 150);
+  const start = performance.now();
+  (function tick(now) {
+    const t = Math.min((now - start) / duration, 1);
+    // cubic ease-in-out: 緩起 → 快中 → 緩末（倒數感）
+    const eased = t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2, 3)/2;
+    el.textContent = Math.round(eased * target);
+    if (t < 1) requestAnimationFrame(tick);
+  })(start);
 }
 
 function observeCards() {
